@@ -1,7 +1,7 @@
 #pragma once
 #include "button.h"
 
-class tile :public button {
+class tile :public Button {
 private:
 	int mNumber;
 public:

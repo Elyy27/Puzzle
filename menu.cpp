@@ -12,8 +12,8 @@ unsigned int menu(SDL_Renderer* renderer, bool* exit, const unsigned int SCREEN_
 	const unsigned int BUTTON_HEIGHT = (SCREEN_HEIGHT - NUMBER_OF_COL_BORDERS * BORDER_THICKNESS) / NUMBER_OF_COL_ELEMENTS;
 
 	const SDL_Color FONT_COLOR = { 0,0,0,255 }; //Black
-	const SDL_Color BUTTON_COLOR = { 0,255,192,203 }; //Pink
-	const SDL_Color BUTTON_DOWN_COLOUR = { 0,204,255,255 }; // Purple
+	const SDL_Color BUTTON_COLOR = { 255, 123, 43, 255 }; //Orange
+	const SDL_Color BUTTON_DOWN_COLOUR = { 50, 255, 100, 255 }; // Green
 
 	const int fontSize = BUTTON_HEIGHT - 40;
 	TTF_Font* font = TTF_OpenFont("assets/octin sports free.ttf", fontSize);
@@ -24,11 +24,12 @@ unsigned int menu(SDL_Renderer* renderer, bool* exit, const unsigned int SCREEN_
 	int startX = BORDER_THICKNESS;
 	int startY = 0;
 
-	vector<button> buttons;
+	vector<Button> buttons;
 	for (int row = 0; row < NUMBER_OF_COL_ELEMENTS; ++row) {
 		startY += BORDER_THICKNESS;
 		SDL_Rect rect = { startX, startY, (int)BUTTON_WIDTH, (int)BUTTON_HEIGHT };
-		button button(rect, BUTTON_COLOR, font, FONT_COLOR);
+		Button button(rect, BUTTON_COLOR, font, FONT_COLOR);
+		button.loadTexture(renderer, buttonTexts[row]);
 		buttons.push_back(button);
 		startY += BUTTON_HEIGHT;
 	}

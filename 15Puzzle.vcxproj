@@ -28,6 +28,7 @@
   <ItemGroup>
     <ClCompile Include="basement.cpp" />
     <ClCompile Include="button.cpp" />
+    <ClCompile Include="game.cpp" />
     <ClCompile Include="interface.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menu.cpp" />

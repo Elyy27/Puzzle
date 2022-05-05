@@ -12,8 +12,8 @@
 #include<SDL_mixer.h>
 #include<SDL_ttf.h>
 
-const int SCREEN_HEIGHT = 410;
-const int SCREEN_WIDTH = 600;
+const unsigned int SCREEN_WIDTH = 410;
+const unsigned int SCREEN_HEIGHT = 600;
 
 using namespace std;
 
