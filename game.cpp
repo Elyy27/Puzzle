@@ -42,13 +42,13 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 	const unsigned int BUTTON_WIDTH = SCREEN_WIDTH - 2 * BORDER_THICKNESS;
 	const unsigned int BUTTON_HEIGHT = TILE_HEIGHT;
 
-	const SDL_Color TILE_COLOUR = { 255,123,43,255 }; //Orange
-	const SDL_Color TILE_COMPLETION_COLOUR = { 50,255,100,255 }; //Orange
+	const SDL_Color TILE_COLOUR = { 255, 182, 193, 255 }; //Pink
+	const SDL_Color TILE_COMPLETION_COLOUR = { 135, 206, 250, 255 }; // Blue
 	const SDL_Color EMPTY_TILE_COLOUR = { 0, 0, 0, 255 }; // Black
 	const SDL_Color FONT_COLOUR = { 0, 0, 0, 255 }; // Black
 	const SDL_Color STOPWATCH_COLOUR = { 160, 102, 198, 255 }; // Purple
-	const SDL_Color BUTTON_COLOUR = { 255, 123, 43, 255 }; // Orange
-	const SDL_Color BUTTON_DOWN_COLOUR = { 50, 255, 100, 255 }; // Green
+	const SDL_Color BUTTON_COLOUR = { 255, 182, 193, 255 }; // Pink
+	const SDL_Color BUTTON_DOWN_COLOUR = { 135, 206, 250, 255 }; // Blue
 	
 	const int fontSize = TILE_HEIGHT - 40;
 	TTF_Font* font = TTF_OpenFont("assets/octin sports free.ttf", fontSize);
@@ -77,8 +77,8 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 
 			tile tile(rect, color, font, FONT_COLOUR, number);
 
-			const char* numberStr = to_string(number).c_str();
-
+			char numberStr[1];
+			sprintf(numberStr, "%d", number);
 			tile.loadTexture(renderer, numberStr);
 			tileRow.push_back(tile);
 
@@ -89,7 +89,7 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 	}
 
 	startX = BORDER_THICKNESS;
-	startY = BORDER_THICKNESS;
+	startY += BORDER_THICKNESS;
 	rect = { startX, startY, (int)BUTTON_WIDTH, (int)BUTTON_HEIGHT };
 	Button menuButton(rect, BUTTON_COLOUR, font, FONT_COLOUR);
 	menuButton.loadTexture(renderer, "Menu");
@@ -150,7 +150,7 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 
 	bool stop = false;
 	SDL_Event event;
-	bool checkkSolved = false;
+	bool checkSolved = false;
 	bool solved = false;
 	bool menuButtonPressed = false;
 
@@ -208,7 +208,7 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 						iter_swap(movingTile, emptyTile);
 						emptyTile = movingTile;
 						movingTile = nullptr;
-						checkkSolved = true;
+						checkSolved = true;
 						break;
 					}
 				}
@@ -216,13 +216,13 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 			}
 		}
 
-		if (checkkSolved) {
+		if (checkSolved) {
 			solved = true;
 			forEachTile(tiles, [&solved, DIFFICULTY](tileArray& tiles, const int row, const int col) {
 				const int number = row * DIFFICULTY + col + 1;
-				if (tiles[row][col].getNumber() != number) solved = true;
+				if (tiles[row][col].getNumber() != number) solved = false;
 			});
-			checkkSolved = false;
+			checkSolved = false;
 		}
 
 		if (solved) {

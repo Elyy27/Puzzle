@@ -4,7 +4,6 @@
 
 
 int main(int argc, char* argv[]) {
-	//srand(time(0));
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	initSDL(window, renderer);

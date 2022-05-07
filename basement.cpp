@@ -13,11 +13,11 @@ void logSDLError(ostream& os, const string& msg, bool fatal) {
 void initSDL(SDL_Window*& window, SDL_Renderer*& renderer) {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 		logSDLError(cout, "SDL_Init", true);
-	window = SDL_CreateWindow(WINDOW_TITLE.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_HEIGHT, SCREEN_WIDTH, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow(WINDOW_TITLE.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	if (window == nullptr) logSDLError(cout, "Create Window", true);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
 	if (renderer == nullptr) logSDLError(cout, "Create Renderer", true);
-	//SDL_RenderSetLogicalSize(renderer, SCREEN_HEIGHT, SCREEN_WIDTH);
+	SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
 void quitSDL(SDL_Window*& window, SDL_Renderer*& renderer) {

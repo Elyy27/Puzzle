@@ -12,8 +12,8 @@ unsigned int menu(SDL_Renderer* renderer, bool* exit, const unsigned int SCREEN_
 	const unsigned int BUTTON_HEIGHT = (SCREEN_HEIGHT - NUMBER_OF_COL_BORDERS * BORDER_THICKNESS) / NUMBER_OF_COL_ELEMENTS;
 
 	const SDL_Color FONT_COLOR = { 0,0,0,255 }; //Black
-	const SDL_Color BUTTON_COLOR = { 255, 123, 43, 255 }; //Orange
-	const SDL_Color BUTTON_DOWN_COLOUR = { 50, 255, 100, 255 }; // Green
+	const SDL_Color BUTTON_COLOR = { 255, 182, 193, 255 }; //Pink
+	const SDL_Color BUTTON_DOWN_COLOUR = { 135, 206, 250, 255 }; // Blue
 
 	const int fontSize = BUTTON_HEIGHT - 40;
 	TTF_Font* font = TTF_OpenFont("assets/octin sports free.ttf", fontSize);

@@ -1,6 +1,6 @@
 #include "interface.h"
 
-interface::interface(const SDL_Rect& rect, const SDL_Color& color, TTF_Font* font, const SDL_Color& fontColor)
+interface::interface(const SDL_Rect& rect, const SDL_Color& color, TTF_Font* const font, const SDL_Color& fontColor)
     : mRect(rect), mColor(color),
     mFontRect({ 0, 0, 0, 0 }), mFontColor(fontColor), mFont(font),
     mTexture(nullptr) {

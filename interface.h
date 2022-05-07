@@ -17,7 +17,7 @@ protected:
 	void centerText();
 
 public:
-	interface(const SDL_Rect& rect, const SDL_Color& color, TTF_Font* font, const SDL_Color& fontColor);
+	interface(const SDL_Rect& rect, const SDL_Color& color, TTF_Font* const font, const SDL_Color& fontColor);
 	
 	void loadTexture(SDL_Renderer* const renderer, const char* text);
 	void render(SDL_Renderer* const renderer) const;
