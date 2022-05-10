@@ -17,6 +17,8 @@ void initSDL(SDL_Window*& window, SDL_Renderer*& renderer) {
 	if (window == nullptr) logSDLError(cout, "Create Window", true);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
 	if (renderer == nullptr) logSDLError(cout, "Create Renderer", true);
+	//music
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1) logSDLError(cout, "Mixer", true);
 	SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 

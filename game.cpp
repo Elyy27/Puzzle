@@ -2,6 +2,7 @@
 #include "stopwatch.h"
 
 typedef vector<vector<tile>> tileArray;
+Mix_Chunk* hitSound = Mix_LoadWAV("audio/hitSound.wav");
 
 static void forEachTile(tileArray& tiles, function<void(tileArray&, const int, const int)>&& func) {
 	for (int row = 0; row < tiles.size(); ++row) {
@@ -77,7 +78,8 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 
 			tile tile(rect, color, font, FONT_COLOUR, number);
 
-			char numberStr[1];
+
+			char numberStr[(((sizeof number) * CHAR_BIT) + 2) / 3 + 2];
 			sprintf(numberStr, "%d", number);
 			tile.loadTexture(renderer, numberStr);
 			tileRow.push_back(tile);
@@ -168,11 +170,13 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 				if (event.type == SDL_MOUSEBUTTONDOWN) {
 					int x, y;
 					SDL_GetMouseState(&x, &y);
+					Mix_PlayChannel(-1, hitSound, 0);
 					if (!solved) {
 						forEachTile(tiles, [x, y, &movingTile, emptyTile, &selected, &doneMoving, &lastTimeMoved](tileArray& tiles, const int row, const int col) {
 							if (tiles[row][col].isMouseInside(x, y)) {
 								if (isEmptyTileInNeighbours(tiles, row, col, emptyTile)) {
 									movingTile = &tiles[row][col];
+
 									selected = true;
 									doneMoving = false;
 									lastTimeMoved = SDL_GetTicks();
@@ -187,7 +191,9 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 				}
 				else if (event.type == SDL_MOUSEBUTTONUP) {
 					menuButton.changeColorTo(BUTTON_COLOUR);
-					if (menuButtonPressed) stop = true;
+					if (menuButtonPressed)
+					{
+						stop = true;					}
 				}
 			}
 		}
