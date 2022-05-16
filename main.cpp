@@ -23,5 +23,9 @@ int main(int argc, char* argv[]) {
 	}
 	quitSDL(window, renderer);
 	TTF_Quit();
+	Mix_FreeMusic(menuMusic);
+	menuMusic = nullptr;
+	Mix_FreeMusic(bgMusic);
+	bgMusic = nullptr;
 	return 0;
 }

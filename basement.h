@@ -1,14 +1,8 @@
 #include<SDL.h>
 #include<iostream>
-#include<cstring>
-#include<cstdlib>
-#include<ctime>
 #include<functional>
+#include<cstring>
 #include<vector>
-#include<algorithm>
-#include<sstream>
-#include<fstream>
-#include<SDL_image.h>
 #include<SDL_mixer.h>
 #include<SDL_ttf.h>
 

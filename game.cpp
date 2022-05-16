@@ -273,4 +273,5 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 
 	TTF_CloseFont(font);
 	font = nullptr;
+	
 }
