@@ -55,6 +55,8 @@ unsigned int menu(SDL_Renderer* renderer, bool* exit, const unsigned int SCREEN_
 				for (int i = 0; i < NUMBER_OF_COL_ELEMENTS; ++i) {
 					if (buttons[i].isMouseInside(x, y)) {
 						buttons[i].changeColorTo(BUTTON_DOWN_COLOUR);
+						Mix_Chunk* hitSound = Mix_LoadWAV("audio/hitSound.wav");
+						Mix_PlayChannel(-1, hitSound, 0);
 						difficulty = i + 3;
 					}
 				}

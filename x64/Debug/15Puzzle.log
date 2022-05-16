@@ -1,17 +1,6 @@
-﻿  game.cpp
-D:\game\15Puzzle\15Puzzle\game.cpp(23,6): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
-D:\game\15Puzzle\15Puzzle\game.cpp(65,24): warning C4018: '<': signed/unsigned mismatch
-D:\game\15Puzzle\15Puzzle\game.cpp(70,25): warning C4018: '<': signed/unsigned mismatch
-D:\game\15Puzzle\15Puzzle\game.cpp(101,25): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
-D:\game\15Puzzle\15Puzzle\game.cpp(123,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\game\15Puzzle\15Puzzle\game.cpp(131,7): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
-D:\game\15Puzzle\15Puzzle\game.cpp(182,38): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-D:\game\15Puzzle\15Puzzle\game.cpp(211,22): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\game\15Puzzle\15Puzzle\game.cpp(223,33): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-D:\game\15Puzzle\15Puzzle\game.cpp(242,35): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-D:\game\15Puzzle\15Puzzle\game.cpp(242,39): warning C4552: '-': result of expression not used
-D:\game\15Puzzle\15Puzzle\game.cpp(244,35): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-D:\game\15Puzzle\15Puzzle\game.cpp(260,34): warning C4244: 'argument': conversion from 'float' to 'Uint32', possible loss of data
-  main.cpp
-  Generating Code...
+﻿  menu.cpp
+D:\game\15Puzzle\15Puzzle\menu.cpp(39,25): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
+D:\game\15Puzzle\15Puzzle\menu.cpp(72,35): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+D:\game\15Puzzle\15Puzzle\menu.cpp(79,38): warning C4244: 'argument': conversion from 'float' to 'Uint32', possible loss of data
+  LINK : D:\game\15Puzzle\x64\Debug\15Puzzle.exe not found or not built by the last incremental link; performing full link
   15Puzzle.vcxproj -> D:\game\15Puzzle\x64\Debug\15Puzzle.exe

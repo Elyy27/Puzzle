@@ -2,7 +2,6 @@
 #include "stopwatch.h"
 
 typedef vector<vector<tile>> tileArray;
-Mix_Chunk* hitSound = Mix_LoadWAV("audio/hitSound.wav");
 
 static void forEachTile(tileArray& tiles, function<void(tileArray&, const int, const int)>&& func) {
 	for (int row = 0; row < tiles.size(); ++row) {
@@ -50,7 +49,7 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 	const SDL_Color STOPWATCH_COLOUR = { 160, 102, 198, 255 }; // Purple
 	const SDL_Color BUTTON_COLOUR = { 255, 182, 193, 255 }; // Pink
 	const SDL_Color BUTTON_DOWN_COLOUR = { 135, 206, 250, 255 }; // Blue
-	
+
 	const int fontSize = TILE_HEIGHT - 40;
 	TTF_Font* font = TTF_OpenFont("assets/octin sports free.ttf", fontSize);
 	if (font == nullptr) logSDLError(cout, "Load Font", true);
@@ -66,7 +65,7 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 		vector<tile> tileRow;
 		startY += BORDER_THICKNESS;
 		startX = 0;
-		
+
 		for (int col = 0; col < DIFFICULTY; ++col) {
 			startX += BORDER_THICKNESS;
 			rect = { startX, startY, (int)TILE_WIDTH, (int)TILE_HEIGHT };
@@ -156,6 +155,8 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 	bool solved = false;
 	bool menuButtonPressed = false;
 
+	
+
 	stopwatch.start();
 
 	while (!stop) {
@@ -170,13 +171,13 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 				if (event.type == SDL_MOUSEBUTTONDOWN) {
 					int x, y;
 					SDL_GetMouseState(&x, &y);
-					Mix_PlayChannel(-1, hitSound, 0);
 					if (!solved) {
 						forEachTile(tiles, [x, y, &movingTile, emptyTile, &selected, &doneMoving, &lastTimeMoved](tileArray& tiles, const int row, const int col) {
-							if (tiles[row][col].isMouseInside(x, y)) {
+							if (tiles[row][col].isMouseInside(x, y)) {						
 								if (isEmptyTileInNeighbours(tiles, row, col, emptyTile)) {
+									Mix_Chunk* slideSound = Mix_LoadWAV("audio/slideSound.wav");
+									Mix_PlayChannel(-1, slideSound, 0);
 									movingTile = &tiles[row][col];
-
 									selected = true;
 									doneMoving = false;
 									lastTimeMoved = SDL_GetTicks();
@@ -186,6 +187,8 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 					}
 					if (menuButton.isMouseInside(x, y)) {
 						menuButton.changeColorTo(BUTTON_DOWN_COLOUR);
+						Mix_Chunk* hitSound = Mix_LoadWAV("audio/hitSound.wav");
+						Mix_PlayChannel(-1, hitSound, 0);
 						menuButtonPressed = true;
 					}
 				}
@@ -193,7 +196,8 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 					menuButton.changeColorTo(BUTTON_COLOUR);
 					if (menuButtonPressed)
 					{
-						stop = true;					}
+						stop = true;
+					}
 				}
 			}
 		}
@@ -227,15 +231,16 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 			forEachTile(tiles, [&solved, DIFFICULTY](tileArray& tiles, const int row, const int col) {
 				const int number = row * DIFFICULTY + col + 1;
 				if (tiles[row][col].getNumber() != number) solved = false;
-			});
+				});
 			checkSolved = false;
 		}
 
 		if (solved) {
 			forEachTile(tiles, [emptyTile, &TILE_COMPLETION_COLOUR](tileArray& tiles, const int row, const int col) {
 				if (emptyTile != &tiles[row][col]) tiles[row][col].changeColorTo(TILE_COMPLETION_COLOUR);
-			});
-		} else stopwatch.calculateTime(renderer);
+				});
+		}
+		else stopwatch.calculateTime(renderer);
 
 		deltaTimeRendered = SDL_GetTicks(); -lastTimeRendered;
 		if (deltaTimeRendered > miliSecondsPerFrame) {
@@ -248,7 +253,7 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 
 			forEachTile(tiles, [renderer, emptyTile](tileArray& tiles, const int row, const int col) {
 				if (emptyTile != &tiles[row][col]) tiles[row][col].render(renderer);
-			});
+				});
 
 			menuButton.render(renderer);
 
@@ -262,12 +267,10 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 
 	forEachTile(tiles, [](tileArray& tiles, const int row, const int col) {
 		tiles[row][col].free();
-	});
+		});
 
 	stopwatch.free();
 
 	TTF_CloseFont(font);
 	font = nullptr;
 }
-
-
