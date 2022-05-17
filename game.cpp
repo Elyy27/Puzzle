@@ -42,13 +42,13 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 	const unsigned int BUTTON_WIDTH = SCREEN_WIDTH - 2 * BORDER_THICKNESS;
 	const unsigned int BUTTON_HEIGHT = TILE_HEIGHT;
 
-	const SDL_Color TILE_COLOUR = { 255, 182, 193, 255 }; //Pink
-	const SDL_Color TILE_COMPLETION_COLOUR = { 135, 206, 250, 255 }; // Blue
-	const SDL_Color EMPTY_TILE_COLOUR = { 0, 0, 0, 255 }; // Black
-	const SDL_Color FONT_COLOUR = { 0, 0, 0, 255 }; // Black
-	const SDL_Color STOPWATCH_COLOUR = { 160, 102, 198, 255 }; // Purple
-	const SDL_Color BUTTON_COLOUR = { 255, 182, 193, 255 }; // Pink
-	const SDL_Color BUTTON_DOWN_COLOUR = { 135, 206, 250, 255 }; // Blue
+	const SDL_Color TILE_COLOR = { 255, 182, 193, 255 }; //Pink
+	const SDL_Color TILE_COMPLETION_COLOR = { 135, 206, 250, 255 }; // Blue
+	const SDL_Color EMPTY_TILE_COLOR = { 0, 0, 0, 255 }; // Black
+	const SDL_Color FONT_COLOR = { 0, 0, 0, 255 }; // Black
+	const SDL_Color STOPWATCH_COLOR = { 160, 102, 198, 255 }; // Purple
+	const SDL_Color BUTTON_COLOR = { 255, 182, 193, 255 }; // Pink
+	const SDL_Color BUTTON_DOWN_COLOR = { 135, 206, 250, 255 }; // Blue
 
 	const int fontSize = TILE_HEIGHT - 40;
 	TTF_Font* font = TTF_OpenFont("assets/octin sports free.ttf", fontSize);
@@ -57,7 +57,7 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 	int startX = BORDER_THICKNESS;
 	int startY = BORDER_THICKNESS;
 	SDL_Rect rect = { startX, startY, (int)STOPWATCH_WIDTH, (int)STOPWATCH_HEIGHT };
-	stopwatch stopwatch(rect, STOPWATCH_COLOUR, font, FONT_COLOUR);
+	stopwatch stopwatch(rect, STOPWATCH_COLOR, font, FONT_COLOR);
 
 	tileArray tiles;
 	startY += TILE_HEIGHT;
@@ -70,12 +70,12 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 			startX += BORDER_THICKNESS;
 			rect = { startX, startY, (int)TILE_WIDTH, (int)TILE_HEIGHT };
 			SDL_Color color;
-			if (row == DIFFICULTY - 1 && col == DIFFICULTY - 1) color = EMPTY_TILE_COLOUR;
-			else color = TILE_COLOUR;
+			if (row == DIFFICULTY - 1 && col == DIFFICULTY - 1) color = EMPTY_TILE_COLOR;
+			else color = TILE_COLOR;
 
 			int number = row * DIFFICULTY + col + 1;
 
-			tile tile(rect, color, font, FONT_COLOUR, number);
+			tile tile(rect, color, font, FONT_COLOR, number);
 
 
 			char numberStr[(((sizeof number) * CHAR_BIT) + 2) / 3 + 2];
@@ -92,7 +92,7 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 	startX = BORDER_THICKNESS;
 	startY += BORDER_THICKNESS;
 	rect = { startX, startY, (int)BUTTON_WIDTH, (int)BUTTON_HEIGHT };
-	Button menuButton(rect, BUTTON_COLOUR, font, FONT_COLOUR);
+	Button menuButton(rect, BUTTON_COLOR, font, FONT_COLOR);
 	menuButton.loadTexture(renderer, "Menu");
 
 	const unsigned int FPS = 60;
@@ -119,6 +119,7 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 
 	vector<vector<int>> neighbours;
 
+	//set random map
 	srand(time(NULL));
 
 	const int deltas[4][2] = { {-1,0}, {0,1}, {1,0}, {0,-1} };
@@ -133,15 +134,18 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 			}
 		}
 
+	//set random empty tile
 		const int randomIndex = rand() % neighbours.size();
 		const int row = neighbours[randomIndex][0];
 		const int col = neighbours[randomIndex][1];
 
+		//swap postions
 		tempXPosition = emptyTile->getXPosition();
 		tempYPosition = emptyTile->getYPosition();
 		emptyTile->setPositionTo(tiles[row][col].getXPosition(), tiles[row][col].getYPosition());
 		tiles[row][col].setPositionTo(tempXPosition, tempYPosition);
 
+		//swap elements
 		iter_swap(&tiles[row][col], emptyTile);
 		emptyTile = &tiles[row][col];
 		emptyTileRow = row;
@@ -186,14 +190,14 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 							});
 					}
 					if (menuButton.isMouseInside(x, y)) {
-						menuButton.changeColorTo(BUTTON_DOWN_COLOUR);
+						menuButton.changeColorTo(BUTTON_DOWN_COLOR);
 						Mix_Chunk* hitSound = Mix_LoadWAV("audio/hitSound.wav");
 						Mix_PlayChannel(-1, hitSound, 0);
 						menuButtonPressed = true;
 					}
 				}
 				else if (event.type == SDL_MOUSEBUTTONUP) {
-					menuButton.changeColorTo(BUTTON_COLOUR);
+					menuButton.changeColorTo(BUTTON_COLOR);
 					if (menuButtonPressed)
 					{
 						stop = true;
@@ -236,8 +240,8 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 		}
 
 		if (solved) {
-			forEachTile(tiles, [emptyTile, &TILE_COMPLETION_COLOUR](tileArray& tiles, const int row, const int col) {
-				if (emptyTile != &tiles[row][col]) tiles[row][col].changeColorTo(TILE_COMPLETION_COLOUR);
+			forEachTile(tiles, [emptyTile, &TILE_COMPLETION_COLOR](tileArray& tiles, const int row, const int col) {
+				if (emptyTile != &tiles[row][col]) tiles[row][col].changeColorTo(TILE_COMPLETION_COLOR);
 				});
 		}
 		else stopwatch.calculateTime(renderer);
