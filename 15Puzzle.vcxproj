@@ -33,7 +33,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="stopwatch.cpp" />
-    <ClCompile Include="textSource.cpp" />
     <ClCompile Include="tile.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
