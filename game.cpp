@@ -3,14 +3,6 @@
 
 typedef vector<vector<tile>> tileArray;
 
-static void forEachTile(tileArray& tiles, function<void(tileArray&, const int, const int)>&& func) {
-	for (int row = 0; row < tiles.size(); ++row) {
-		for (int col = 0; col < tiles[row].size(); ++col) {
-			func(tiles, row, col);
-		}
-	}
-}
-
 static inline bool inBounds(const int row, const int col, const int maxRow, const int maxCol) {
 	return !(row<0 || row>maxRow || col<0 || col>maxCol);
 }
@@ -176,18 +168,20 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 					int x, y;
 					SDL_GetMouseState(&x, &y);
 					if (!solved) {
-						forEachTile(tiles, [x, y, &movingTile, emptyTile, &selected, &doneMoving, &lastTimeMoved](tileArray& tiles, const int row, const int col) {
-							if (tiles[row][col].isMouseInside(x, y)) {						
-								if (isEmptyTileInNeighbours(tiles, row, col, emptyTile)) {
-									Mix_Chunk* slideSound = Mix_LoadWAV("audio/slideSound.wav");
-									Mix_PlayChannel(-1, slideSound, 0);
-									movingTile = &tiles[row][col];
-									selected = true;
-									doneMoving = false;
-									lastTimeMoved = SDL_GetTicks();
+						for (int row =0; row<tiles.size();row++) {
+							for (int col = 0; col < tiles[row].size(); col++) {
+								if (tiles[row][col].isMouseInside(x, y)) {
+									if (isEmptyTileInNeighbours(tiles, row, col, emptyTile)) {
+										Mix_Chunk* slideSound = Mix_LoadWAV("audio/slideSound.wav");
+										Mix_PlayChannel(-1, slideSound, 0);
+										movingTile = &tiles[row][col];
+										selected = true;
+										doneMoving = false;
+										lastTimeMoved = SDL_GetTicks();
+									}
 								}
 							}
-							});
+						};
 					}
 					if (menuButton.isMouseInside(x, y)) {
 						menuButton.changeColorTo(BUTTON_DOWN_COLOR);
@@ -232,17 +226,21 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 
 		if (checkSolved) {
 			solved = true;
-			forEachTile(tiles, [&solved, DIFFICULTY](tileArray& tiles, const int row, const int col) {
-				const int number = row * DIFFICULTY + col + 1;
-				if (tiles[row][col].getNumber() != number) solved = false;
-				});
+			for (int row = 0; row < tiles.size(); row++) {
+				for (int col = 0; col < tiles[row].size(); col++) {
+					const int number = row * DIFFICULTY + col + 1;
+					if (tiles[row][col].getNumber() != number) solved = false;
+				};
+			}
 			checkSolved = false;
 		}
 
 		if (solved) {
-			forEachTile(tiles, [emptyTile, &TILE_COMPLETION_COLOR](tileArray& tiles, const int row, const int col) {
-				if (emptyTile != &tiles[row][col]) tiles[row][col].changeColorTo(TILE_COMPLETION_COLOR);
-				});
+			for (int row = 0; row < tiles.size(); row++) {
+				for (int col = 0; col < tiles[row].size(); col++) {
+					if (emptyTile != &tiles[row][col]) tiles[row][col].changeColorTo(TILE_COMPLETION_COLOR);
+				}
+			};
 		}
 		else stopwatch.calculateTime(renderer);
 
@@ -255,9 +253,11 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 
 			stopwatch.render(renderer);
 
-			forEachTile(tiles, [renderer, emptyTile](tileArray& tiles, const int row, const int col) {
-				if (emptyTile != &tiles[row][col]) tiles[row][col].render(renderer);
-				});
+			for (int row = 0; row < tiles.size(); row++) {
+				for (int col = 0; col < tiles[row].size(); col++) {
+					if (emptyTile != &tiles[row][col]) tiles[row][col].render(renderer);
+				}
+			};
 
 			menuButton.render(renderer);
 
@@ -269,10 +269,11 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 	}
 	if (solved)  cout << "Solved!" << endl;
 
-	forEachTile(tiles, [](tileArray& tiles, const int row, const int col) {
-		tiles[row][col].free();
-		});
-
+	for (int row = 0; row < tiles.size(); row++) {
+		for (int col = 0; col < tiles[row].size(); col++) {
+			tiles[row][col].free();
+		};
+	}
 	stopwatch.free();
 
 	TTF_CloseFont(font);

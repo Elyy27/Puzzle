@@ -5,7 +5,7 @@ Button::Button(const SDL_Rect& rect, const SDL_Color& color, TTF_Font* const fon
 
 }
 
-bool Button::isMouseInside(const int x, const int y) const {
+bool Button::isMouseInside(const int x, const int y) {
     bool inside = true;
     if (x < mRect.x) inside = false;
     else if (x > mRect.x + mRect.w) inside = false;

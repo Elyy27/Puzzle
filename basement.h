@@ -1,6 +1,5 @@
 #include<SDL.h>
 #include<iostream>
-#include<functional>
 #include<cstring>
 #include<vector>
 #include<SDL_mixer.h>

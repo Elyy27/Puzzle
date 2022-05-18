@@ -1,9 +1,9 @@
 #include "tile.h"
 
 tile::tile(const SDL_Rect& rect, const SDL_Color& color, TTF_Font* const font, const SDL_Color& fontColor, const int number)
-	: Button(rect, color, font, fontColor),
-	mNumber(number) {
-
+	: Button(rect, color, font, fontColor)
+{
+	mNumber = number;
 }
 
 int tile::getXPosition() {
