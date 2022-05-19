@@ -1,13 +1,1 @@
-﻿  game.cpp
-D:\game\15Puzzle\15Puzzle\game.cpp(14,6): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
-D:\game\15Puzzle\15Puzzle\game.cpp(56,24): warning C4018: '<': signed/unsigned mismatch
-D:\game\15Puzzle\15Puzzle\game.cpp(61,25): warning C4018: '<': signed/unsigned mismatch
-D:\game\15Puzzle\15Puzzle\game.cpp(92,25): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
-D:\game\15Puzzle\15Puzzle\game.cpp(115,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\game\15Puzzle\15Puzzle\game.cpp(123,7): warning C4267: 'argument': conversion from 'size_t' to 'const int', possible loss of data
-D:\game\15Puzzle\15Puzzle\game.cpp(180,39): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-D:\game\15Puzzle\15Puzzle\game.cpp(211,22): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\game\15Puzzle\15Puzzle\game.cpp(223,33): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-D:\game\15Puzzle\15Puzzle\game.cpp(249,35): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-D:\game\15Puzzle\15Puzzle\game.cpp(267,34): warning C4244: 'argument': conversion from 'float' to 'Uint32', possible loss of data
-  15Puzzle.vcxproj -> D:\game\15Puzzle\x64\Debug\15Puzzle.exe
+﻿  15Puzzle.vcxproj -> D:\game\15Puzzle\x64\Debug\15Puzzle.exe

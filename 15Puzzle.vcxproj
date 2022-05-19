@@ -95,8 +95,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\ADMIN\Downloads\SDL2-devel-2.0.20-VC\SDL2\include;C:\Users\ADMIN\Downloads\SDL2_image-devel-2.0.5-VC\SDL2_image-2.0.5\include;C:\Users\ADMIN\Downloads\SDL2_ttf-devel-2.0.18-VC\SDL2_ttf-2.0.18\include;C:\Users\ADMIN\Downloads\SDL2_mixer-devel-2.0.4-VC\SDL2_mixer-2.0.4\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\ADMIN\Downloads\SDL2_mixer-devel-2.0.4-VC\SDL2_mixer-2.0.4\lib\x64;C:\Users\ADMIN\Downloads\SDL2_ttf-devel-2.0.18-VC\SDL2_ttf-2.0.18\lib\x64;C:\Users\ADMIN\Downloads\SDL2_image-devel-2.0.5-VC\SDL2_image-2.0.5\lib\x64;C:\Users\ADMIN\Downloads\SDL2-devel-2.0.20-VC\SDL2\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\game\15Puzzle\15Puzzle\include\SDL2_ttf;D:\game\15Puzzle\15Puzzle\include\SDL2_mixer;D:\game\15Puzzle\15Puzzle\include\SDL2;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\game\15Puzzle\15Puzzle\lib\SDL2_ttf;D:\game\15Puzzle\15Puzzle\lib\SDL2_mixer;D:\game\15Puzzle\15Puzzle\lib\SDL2;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
