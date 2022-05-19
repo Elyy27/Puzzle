@@ -244,7 +244,7 @@ void game(SDL_Renderer* renderer, bool* exit, const unsigned int DIFFICULTY, con
 		}
 		else stopwatch.calculateTime(renderer);
 
-		deltaTimeRendered = SDL_GetTicks(); -lastTimeRendered;
+		deltaTimeRendered = SDL_GetTicks() - lastTimeRendered;
 		if (deltaTimeRendered > miliSecondsPerFrame) {
 			lastTimeRendered = SDL_GetTicks();
 
