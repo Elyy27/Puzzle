@@ -95,8 +95,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)15Puzzle\include\SDL2_ttf;$(SolutionDir)15Puzzle\include\SDL2;$(SolutionDir)15Puzzle\include\SDL2_mixer;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)15Puzzle\lib\SDL2_ttf;$(SolutionDir)15Puzzle\lib\SDL2_mixer;$(SolutionDir)15Puzzle\lib\SDL2;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)include\SDL2_ttf;$(SolutionDir)include\SDL2;$(SolutionDir)include\SDL2_mixer;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)lib\SDL2_ttf;$(SolutionDir)lib\SDL2_mixer;$(SolutionDir)lib\SDL2;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
